@@ -62,7 +62,6 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         if (intent.hasExtra(Constants.USER_NAME)) {
             name = intent.getStringExtra(Constants.USER_NAME)!!
         }
-
     }
 
     private fun showNextQuestion() {
@@ -82,6 +81,14 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
             textViewOptionFour.text = question.optionFour
         } else {
             checkButton.text = "FINISH"
+            //start activity here
+            Intent(this, ResultActivity::class.java).also {
+                it.putExtra(Constants.USER_NAME,name)
+                it.putExtra(Constants.SCORE, score)
+                it.putExtra(Constants.TOTAL_QUESTIONS, questionsList.size)
+
+                startActivity(it)
+            }
         }
 
         questionsCounter++
